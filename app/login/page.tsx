@@ -19,7 +19,6 @@ function Login() {
     try {
       await axios.post("/api/login", credentials);
       const { data } = await axios.get("/api/me");
-console.log(data);
 
       auth?.login(data.user);
       

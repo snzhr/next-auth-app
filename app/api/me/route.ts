@@ -1,24 +1,12 @@
-import { verifyToken } from "@/utils/verifyToken";
-import { cookies } from "next/headers";
+import { authMiddleware } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
+
+const tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30";
 
 export async function GET(request: NextRequest) {
   try {
-    const appCookies = await cookies();
-    const token = appCookies.get("token");
-    if (!token?.value) {
-      return NextResponse.json({ messsage: "Unathorized" }, { status: 401 });
-    }
-
-    const { user, error } = verifyToken(token.value);
-
-    if (error) {
-      return NextResponse.json(
-        { message: "Forbidden: Insufficient permissions" },
-        { status: 403 }
-      );
-    }
-
+   
+    const user = authMiddleware(request);
     return NextResponse.json({ success: true , user});
   } catch (error) {
     console.log(error);
