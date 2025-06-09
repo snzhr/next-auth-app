@@ -1,0 +1,15 @@
+.header nav{
+    background-color: gray;
+    padding: 15px 25px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header nav div{
+    display: flex;
+    gap: 20px;
+}
+.header span{
+    cursor: pointer;
+}

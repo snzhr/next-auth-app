@@ -8,9 +8,8 @@ import axios from "axios";
 
 function RegisterForm() {
   const [credentials, setCredentials] = React.useState({
-    fullName: '',
     email: '',
-    username: '',
+    name: '',
     password: ''
   });
 
@@ -22,8 +21,7 @@ function RegisterForm() {
       
     } catch (error) {
         console.error('Registration error:', error);
-      
-    } 
+    }
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -33,9 +31,8 @@ function RegisterForm() {
 
   return (
     <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-      <Input name="fullName" value={credentials.fullName} onChange={handleChange} type="text" placeholder="Full name" />
       <Input name="email" value={credentials.email} onChange={handleChange} type="email" placeholder="Email" />
-      <Input name="username" value={credentials.username} onChange={handleChange} type="text" placeholder="Username" />
+      <Input name="name" value={credentials.name} onChange={handleChange} type="text" placeholder="Name" />
       <Input name="password" value={credentials.password} onChange={handleChange} type="password" placeholder="Password" />
       <button type="submit" className={styles.button}>
         Register

@@ -1,21 +1,32 @@
-import 'bcryptjs';
+import { createUser, getUserByEmail } from '@/services/userService';
 import bcrypt from 'bcryptjs';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const credentials = await request.json();
-    const { fullName, email, username, password } = credentials;
-    if (!fullName || !email || !username || !password) {
-      return Response.json({ error: "All fields are required" }, { status: 400 });
+    const { email, name, password } = credentials;
+    if (!email || !name || !password) {
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
+
+    const existingUser = await getUserByEmail(email);
+    if (existingUser) {
+      return NextResponse.json({ error: "User already exists" }, { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("Hashed Password:", hashedPassword);
+    const user = {
+      email,
+      name,
+      password: hashedPassword,
+    }
+
+    await createUser(user);
     
-    return Response.json({ message: "Registration successful", user: { fullName, email, username } }, { status: 201 });
+    return NextResponse.json({ message: "Registration successful", user: { email, name } }, { status: 201 });
   } catch (error) {
-    console.error("Registration error:", error);
-    return Response.json({ error: "Registration failed" }, { status: 400 });
+    return NextResponse.json({ error: "Registration failed" }, { status: 400 });
   }
     
 }
