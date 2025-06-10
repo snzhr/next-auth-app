@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import { getUserByEmail } from "@/services/userService";
 import { createSecretToken } from "@/utils/secretToken";
 import bcrypt from "bcryptjs";
@@ -14,10 +15,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const existingUser = await getUserByEmail(email);
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
 
     if (!existingUser) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
     }
 
     const isPasswordMatch = await bcrypt.compare(
@@ -32,13 +38,12 @@ export async function POST(request: NextRequest) {
     }
 
     const token = createSecretToken({
-      name: existingUser.name,
-      userId: crypto.randomUUID(),
+      name: existingUser.name as string,
+      userId: existingUser.id as number,
     });
 
-
     const response = NextResponse.json(
-      { message: "Login successful"},
+      { message: "Login successful" },
       { status: 200 }
     );
 

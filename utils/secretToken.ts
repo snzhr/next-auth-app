@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 export const SECRET_KEY = "nextapp";
 
 type Token = {
-  userId: string;
+  userId: number;
   name: string;
 };
 

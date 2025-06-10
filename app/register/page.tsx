@@ -2,9 +2,12 @@ import React from 'react'
 import styles from './Register.module.css';
 import Link from 'next/link';
 import RegisterForm from '@/components/register-form/RegisterForm';
+import prisma from '@/lib/prisma';
 
-function Register() {
-
+async function Register() {
+  const users = await prisma.user.findMany();
+  // console.log(users);
+  
   return (
     <div className={styles.register}>
       <h1 className={styles.title}>Register</h1>

@@ -1,20 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "./verifyToken";
+import { IUser } from "@/models/user";
 
-export function authMiddleware(request: NextRequest) {
+export function authMiddleware(request: NextRequest): Partial<IUser> | null {
     const token = request.cookies.get("token");
     if (!token?.value) {
-      return NextResponse.json({ messsage: "Unathorized" }, { status: 401 });
+      return null;
     }
-
     const { user, error } = verifyToken(token.value);
 
     if (error) {
-      return NextResponse.json(
-        { message: "Forbidden: Insufficient permissions" },
-        { status: 403 }
-      );
+      return null;
     }
-
     return user;
 }

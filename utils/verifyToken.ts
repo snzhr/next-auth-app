@@ -10,7 +10,7 @@ type verificationResponse = {
 export function verifyToken(token:string): verificationResponse {
   try {
     const decoded = jwt.verify(token, SECRET_KEY) as JwtPayload;
-    return { user: {name: decoded?.name}, error: null };
+    return { user: {name: decoded?.name, id: decoded.userId}, error: null };
   } catch (error) {
     return { user: null, error };
   }
