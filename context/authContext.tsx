@@ -11,8 +11,8 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: any) {
-  const [user, setUser] = useState<IUser | null>(null);
+export function AuthProvider({ children, initialUser }: any) {
+  const [user, setUser] = useState<IUser | null>(initialUser);
 
   const login = (user: IUser) => setUser(user);
 
