@@ -1,0 +1,27 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.post a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: teal;
+    color: #fff;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.content{
+    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+}

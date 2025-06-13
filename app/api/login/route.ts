@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     const token = createSecretToken({
       name: existingUser.name as string,
-      userId: existingUser.id as number,
+      userId: existingUser.id as string,
     });
 
     const response = NextResponse.json(

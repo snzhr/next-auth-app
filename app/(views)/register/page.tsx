@@ -5,9 +5,6 @@ import RegisterForm from '@/components/register-form/RegisterForm';
 import prisma from '@/lib/prisma';
 
 async function Register() {
-  const users = await prisma.user.findMany();
-  // console.log(users);
-  
   return (
     <div className={styles.register}>
       <h1 className={styles.title}>Register</h1>
