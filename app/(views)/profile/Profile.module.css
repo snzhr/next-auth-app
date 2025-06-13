@@ -1,0 +1,23 @@
+.profile{
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+}
+
+.profile > div:first-child{
+    width: 40%;
+}
+
+.profile p{
+    display: flex;
+    gap: 5px;
+    font-size: 18px;
+}
+
+.profile > div{
+    min-height: 50vh;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}

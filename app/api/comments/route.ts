@@ -1,10 +1,11 @@
 import prisma from "@/lib/prisma";
-import { getPosts } from "@/services/posts";
+import { getComments } from "@/services/comments";
 import { NextRequest, NextResponse } from "next/server";
+
 
 export async function GET() {
   try {
-    const posts = await getPosts({});
+    const posts = await getComments({});
     return NextResponse.json(
       posts,
       { status: 200 }
@@ -23,16 +24,15 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { title, content, authorId } = await request.json();
-    const post = await prisma.post.create({
+    const { content, authorId, postId } = await request.json();
+    const comment = await prisma.comment.create({
       data: {
         content,
-        title,
         authorId,
+        postId,
       },
     });
-
-    return NextResponse.json({ message: "Success", post }, { status: 201 });
+    return NextResponse.json({ message: "Success", comment }, { status: 201 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

@@ -1,31 +1,36 @@
+import prisma from "@/lib/prisma";
 import { IUser } from "../models/user";
+import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
+import { verifyToken } from "@/utils/verifyToken";
 
-import bcrypt from 'bcryptjs';
+export async function createUser<IUser>(user: IUser) {}
 
-const MOCK_USER: IUser = {
-  name: "Test User",
-  email: "test@example.com",
-  password: await bcrypt.hash("test123", 10)
-};
-
-const users: IUser[] = [MOCK_USER];
-
-export async function createUser<IUser>(user: IUser): Promise<IUser> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      users.push(user);
-      resolve(user);
-    }, 1000);
+export async function getUserByEmail(email: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
   });
+
+  return user;
 }
 
-export async function getUserByEmail(
-  email: string
-): Promise<IUser | undefined> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const user = users.find((user) => user.email === email);
-      resolve(user);
-    }, 1000);
+export async function getUserById() {
+  const token = (await cookies()).get("token");
+
+  if (!token) return null;
+
+  const { user, error } = verifyToken(token.value);
+
+  if (error) return null;
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      id: user?.id,
+    },
+    omit: { password: true },
   });
+
+  return existingUser;
 }

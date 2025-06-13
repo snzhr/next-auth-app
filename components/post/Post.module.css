@@ -8,20 +8,39 @@
 }
 
 .post a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: teal;
-    color: #fff;
-    width: fit-content;
-    padding: 5px;
-    border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: teal;
+  color: #fff;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
 }
 
-.content{
-    display: -webkit-box;
+.content {
+  display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: 5;
   line-clamp: 5;
+}
+
+.footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meta{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.meta p{
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

@@ -5,9 +5,9 @@ export interface IPost {
   id?: string;
   title: string;
   content: string;
-  author: IUser;
+  author?: IUser;
   authorId: string;
-  comments: IComment[];
+  comments?: IComment[];
   createdAt: Date;
   updatedAt: Date;
 }
