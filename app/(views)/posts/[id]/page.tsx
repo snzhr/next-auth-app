@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./SinglePost.module.css";
 import CommentForm from "@/components/comment-form/CommentForm";
 import { getComments } from "@/services/comments";
+import Comment from "@/components/comment/Comment";
 
 type Props = {
   params: { id: string };
@@ -23,19 +24,13 @@ async function SinglePost({ params }: Props) {
         </div>
       </div>
       <div className={styles.comments}>
-        <div>
           {
             comments.map(comment => {
-              return <div>
-                <p>{comment.content}</p>
-                <p>{comment.author.name}</p>
-                <p>{comment.createdAt.toLocaleDateString("en-US", {})}</p>
-              </div>
+              return <Comment comment={comment}  />
             })
           }
         </div>
         <CommentForm postId={id} />
-      </div>
     </div>
   );
 }

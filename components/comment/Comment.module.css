@@ -1,0 +1,15 @@
+.comment{
+    padding: 10px;
+}
+
+.comment > div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment > div span{
+    color: gray;
+    font-size: 15px;
+}

@@ -21,4 +21,17 @@
 .singlePost div{
     display: flex;
     flex-direction: column;
+    color: gray;
+}
+
+.comments{
+    border: 1px solid rgb(212, 212, 212);
+    padding: 10px 5px;
+    margin: 0 0 10px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 300px;
+    overflow-y: auto;
 }
