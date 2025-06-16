@@ -18,12 +18,14 @@ function CommentForm({ postId }: { postId: string }) {
         authorId: auth?.user?.id,
       };
 
-      const { data } = await axios.post("/api/comments", comment);
+      await axios.post("/api/comments", comment);
       setContent("");
     } catch (error) {
       console.log(error);
     }
   }
+
+  if (!auth || !auth?.user) return null;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

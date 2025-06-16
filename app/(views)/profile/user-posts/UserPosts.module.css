@@ -6,7 +6,7 @@
     padding: 10px;
 }
 
-.user-post div{
+.user-post > div{
     min-height: 100px;
     flex: 0 0 100%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -19,5 +19,11 @@
 }
 
 .user-post a{
+    font-size: 20px;
+}
+
+.actions{
+    display: flex;
+    gap: 10px;
     font-size: 20px;
 }

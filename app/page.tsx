@@ -1,4 +1,3 @@
-import Header from "@/components/header/Header";
 import styles from "./page.module.css";
 import HomePage from "@/components/homepage/HomePage";
 

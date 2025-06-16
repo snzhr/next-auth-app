@@ -7,7 +7,7 @@ function Comment({ comment }: { comment: IComment }) {
     <div className={styles.comment}>
       <div>
         <h3>{comment.author.name}</h3>
-        <span>{comment.createdAt.toLocaleDateString("en-US", {})}</span>
+        <span>{comment.createdAt.toLocaleString("en-US", {})}</span>
       </div>
       <p>{comment.content}</p>
     </div>

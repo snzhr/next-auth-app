@@ -5,11 +5,12 @@ import CommentForm from "@/components/comment-form/CommentForm";
 import { getComments } from "@/services/comments";
 import Comment from "@/components/comment/Comment";
 
-type Props = {
+// TODO: centralize this
+export type SinglePostProps = {
   params: { id: string };
 };
 
-async function SinglePost({ params }: Props) {
+async function SinglePost({ params }: SinglePostProps) {
   const { id } = await params;
   const post = await getPost(id);
   const comments = await getComments({postId: id});
@@ -20,17 +21,21 @@ async function SinglePost({ params }: Props) {
         <p>{post?.content}</p>
         <div>
           <span>Author: {post?.author.name}</span>
-          <span>Date: {post?.createdAt.toDateString()}</span>
+          <span>Date: {post?.createdAt.toLocaleDateString("en-US")}</span>
         </div>
       </div>
       <div className={styles.comments}>
           {
+            comments.length === 0 ? <p>No comments</p> : 
             comments.map(comment => {
-              return <Comment comment={comment}  />
+              return <Comment key={comment.id} comment={comment}  />
             })
           }
         </div>
+        {
+
         <CommentForm postId={id} />
+        }
     </div>
   );
 }
