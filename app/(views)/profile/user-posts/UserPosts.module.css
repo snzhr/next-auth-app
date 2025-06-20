@@ -27,3 +27,32 @@
     gap: 10px;
     font-size: 20px;
 }
+
+.actions button{
+    border: none;
+    background: none;
+    font-size: 20px;
+}
+
+.modal-actions{
+    padding: 10px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.modal-actions button{
+    font-size: 15px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: antiquewhite;
+    cursor: pointer;
+}
+
+.confirm-btn{
+    background-color: #099260;
+}
+
+.cancel-btn{
+    background-color: #d1352a;
+}

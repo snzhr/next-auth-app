@@ -6,6 +6,7 @@ import Header from "@/components/header/Header";
 import { cookies } from "next/headers";
 import prisma from "@/lib/prisma";
 import { verifyToken } from "@/utils/verifyToken";
+import ModalProvider from "@/context/modalContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,8 +39,10 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AuthProvider initialUser={user}>
-          <Header />
-          {children}
+          <ModalProvider>
+            <Header />
+            {children}
+          </ModalProvider>
         </AuthProvider>
       </body>
     </html>
